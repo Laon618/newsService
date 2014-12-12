@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>news</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="./bootstrap/bootstrap-theme.css">
+	<!-- Customized by SEON -->
+	<link rel="stylesheet" href="addNews.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./angularJS/angular.min.js"></script>
+    <script type="text/javascript" src="review.js"></script>
+    <script type="text/javascript" src="showNews.js"></script>
+</head>
+<body>
+        <ol class="breadcrumb">
+        <li><a href="#">News List</a></li>
+        <li class="active">Add News</li>
+    </ol>
+    <div class="news-box">
+        <h1 class="col-md-8 text-center">뉴스 입력</h1>
+
+        <div class="col-md-8 news-box">
+            <input type="text" class="form-control" placeholder="News Title">
+        </div>
+        <div class="col-md-5 news-box">
+            <input type="text" class="form-control" placeholder="author">
+        </div>
+        <div class="col-md-3 news-box">
+            <input type="text" class="form-control" placeholder="date">
+        </div>
+        <div class="col-md-8 news-box">
+            <input type="text" class="form-control" placeholder="article" id="article">
+        </div>
+
+        <div class="col-md-5">
+            <button type="button" class="btn btn-default btn-lg pull-right"> 
+                Submit
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

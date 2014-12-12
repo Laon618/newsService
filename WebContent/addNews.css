@@ -1,0 +1,9 @@
+#article{
+	width: 500px;
+	height: 500px;
+}
+
+.btn-lg{
+    display: block;
+    position: relative;
+}

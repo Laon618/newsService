@@ -1,0 +1,61 @@
+<html ng-app="newsService">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>news</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+	<!-- Customized by SEON -->
+    
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
+    <!-- angular.js-->
+    <script type="text/javascript" src="./angularJS/angular.min.js"></script>
+    <script type="text/javascript" src="showNews.js"></script>
+    <script type="text/javascript" src="review.js"></script>
+</head>
+<body ng-controller= "newsController as newsCon">
+    <ol class="breadcrumb">
+        <li class="active">News List</li>
+    </ol>
+    
+	<h1 class="col-md-8 text-center">뉴스 리스트</h1>
+    <div>
+        <make-news-list></make-news-list>
+<!--
+        <div class="list-group col-md-8" >
+            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'-date'" ng-show="list.isSelected(3)"> 
+                {{article.title}}
+                <p class="pull-right">{{article.date}}</p>
+            </a>
+            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'date'" ng-show="list.isSelected(1)"> 
+                {{article.title}}
+                <p class="pull-right">{{article.date}}</p>
+            </a>
+        </div>
+-->
+        <div class="col-md-8">
+            <button type="button" class="btn btn-default pull-right" aria-label="Left Align">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add News
+            </button>
+            <button type="button" class="btn btn-default pull-right" aria-label="Left Align" ng-click="list.selectOrder(1)">
+                <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+                order
+            </button>
+            <button type="button" class="btn btn-default pull-right" aria-label="Left Align" ng-click="list.selectOrder(3)">
+                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span>
+                re-order
+            </button>
+
+        </div>
+    </div>
+</body>
+</html>
