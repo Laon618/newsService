@@ -9,6 +9,7 @@ public class main {
 		String host="jdbc:mysql://192.168.56.102/NewsDB";
 		String user="seon";
 		String pw="hafs2534";
+		
 		Connection conn= DriverManager.getConnection(host,user,pw);
 		//실제 DB에 접속할 때 씁니다. 
 		//conn으로부터 stmt를 받아옵니다. 

@@ -4,26 +4,20 @@
         var newsCon = this;
         this.articles = [];
         
-        $http.get('news.json').success(function(data){
+        $http.get('newsSample.json').success(function(data){
             newsCon.articles = data;
         });
     }]);
     
-//    app.controller('ReviewController', function(){
-//        this.review={};
-//        
-//        this.addReview=function(article){
-//            article.reviews.push(this.review);
-//            this.review={};
-//        };
-//    });
-    
-    app.directive('articleBody', function(){
-        return{
-            restrict: 'E',
-            templateUrl: 'articleBody.html'
+    app.controller('ReviewController', function(){
+        this.review={};
+        
+        this.addReview=function(article){
+            article.reviews.push(this.review);
+            this.review={};
         };
     });
+    
 //    
 //    app.directive('reviews', function(){
 //        return{
@@ -49,24 +43,14 @@
 //        };
 //    });
     
-    app.directive('makeNewsList', function(){
-        return{
-            restrict: 'E',
-            templateUrl: 'makeNewsList.html',
-            
-            controller: function(){
-                this.order=1;
+    app.controller('ListController', function(){
+    	this.order=1;
         
-                this.selectOrder = function(Order){
-                    this.order = Order; 
-
-                };
-        
-                this.isSelected = function(checkOrder){
-                    return this.order === checkOrder;
-                };
-            },
-            controllerAs: 'list'
+        this.selectOrder = function(Order){
+        	this.order = Order; 
+        };
+        this.isSelected =function(checkOrder){
+        	return this.order === checkOrder;
         };
     });
     
