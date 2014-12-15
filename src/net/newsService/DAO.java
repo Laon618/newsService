@@ -6,6 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.newsService.nw.webNews;
+import net.newsService.rv.webReview;
 
 public class DAO {
 	String host;
@@ -34,4 +39,28 @@ public class DAO {
 		 pstmt.setInt(4, 1);
 		 pstmt.execute();
 	 }
+	 
+	 public List getReviews(int nid) throws SQLException{
+		 String select="SELECT * FROM reviews WHERE news_nid=?";
+		 pstmt= conn.prepareStatement(select);
+		 pstmt.setInt(1, nid);
+		 ResultSet rs=pstmt.executeQuery();
+		 List<webReview> reviews = new ArrayList<webReview>();
+		while(rs.next()){
+			webReview review = new webReview(rs.getString("name"), rs.getString("body"));
+			reviews.add(review);
+		}
+		return reviews;
+	 }
+	 
+	 public webNews getNews(int nid) throws SQLException{
+		 String select="SELECT * FROM news WHERE nid=?";
+		 pstmt= conn.prepareStatement(select);
+		 pstmt.setInt(1, nid);
+		 ResultSet rs=pstmt.executeQuery();
+		 rs.next();
+		webNews news = new webNews(rs.getInt(1), rs.getString("title"), rs.getString("author"), rs.getString("body"), rs.getString("uDate"));
+		return news;
+	 }
+
 }
