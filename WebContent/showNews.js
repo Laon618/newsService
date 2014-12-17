@@ -1,58 +1,48 @@
 (function () {
-    var app = angular.module('newsService', ['newsService-reviews']);
-    app.controller('newsController', ['$http', function($http) {
-        var newsCon = this;
-        this.articles = [];
-        
-        $http.get('newsSample.json').success(function(data){
-            newsCon.articles = data;
-        });
+    var app = angular.module('newsService', []);
+
+	app.config(function($locationProvider) {
+		$locationProvider.html5Mode({
+			  enabled: true,
+			  requireBase: false
+			});
+	});
+
+    app.controller('newsController', ['$http', '$location', function($http, $location) {
+
+      var nid = $location.search().nid;
+      var newsCon = this;
+
+		$http({
+			method: 'GET',
+			url:'/findNews?nid=' + nid
+		}).success(function(data){
+			newsCon.article= data;
+		});
+		
+        this.toList = function(){
+        	window.location.href = 'newsList.jsp';
+        }
+
     }]);
     
-    app.controller('ReviewController', function(){
+    app.controller('ReviewController', ['$http', '$location', function($http, $location){
+    	
+        var nid = $location.search().nid;
         this.review={};
         
         this.addReview=function(article){
-            article.reviews.push(this.review);
-            this.review={};
+        	$http({
+    			method: 'POST',
+    			url:'/addReview',
+    			data: { nid: nid, name: this.review.name, body: this.review.body}
+    		}).success(function(data){
+    			window.location.href = 'showNews.jsp?nid=' + nid;
+    		});
         };
-    });
+    }]);
     
-//    
-//    app.directive('reviews', function(){
-//        return{
-//            restrict: 'E',
-//            templateUrl: 'reviews.html'
-//        };
-//    });
-//    
-//    app.directive('addReview', function(){
-//        return{
-//            restrict: 'E',
-//            templateUrl: 'addReview.html',
-//            
-//            controller: function(){
-//                this.review={};
-//        
-//                this.addReview=function(article){
-//                    article.reviews.push(this.review);
-//                    this.review={};
-//                };
-//            },
-//            controllerAs: 'reviewCon'
-//        };
-//    });
-    
-    app.controller('ListController', function(){
-    	this.order=1;
-        
-        this.selectOrder = function(Order){
-        	this.order = Order; 
-        };
-        this.isSelected =function(checkOrder){
-        	return this.order === checkOrder;
-        };
-    });
+
     
     
 })();

@@ -38,6 +38,7 @@ public class findReview extends HttpServlet {
 			}
 			Gson gson = new Gson();
 			String jsonData =gson.toJson(reviews);
+			resp.setContentType("application/json;charset=UTF-8");
 			out.print(jsonData);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

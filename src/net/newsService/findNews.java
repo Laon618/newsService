@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +31,44 @@ public class findNews extends HttpServlet {
 		}
 		
 		int nid = Integer.parseInt(newsId);
+//		out.println("nid " +nid);
+		try {
+			DAO dao = new DAO();
+			webNews news = dao.getNews(nid);
+			if(news==null){
+				return;
+			}
+			
+			List reviews = dao.getReviews(nid);
+			if(reviews==null){
+				return;
+			}
+			news.setReviewList(reviews);
+			
+			Gson gson = new Gson();
+			String jsonData =gson.toJson(news);
+			resp.setContentType("application/json;charset=UTF-8");
+//			req.setAttribute("jsonNews", jsonData);
+//			req.getRequestDispatcher("/showNews.jsp").forward(req, resp);
+			out.print(jsonData);
+//			String jsonReview =gson.toJson(reviews);
+//			out.print(jsonReview);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String newsId = req.getParameter("nid");
+		PrintWriter out = resp.getWriter();
+		if(newsId==null){
+			resp.sendRedirect("/");
+			return;
+		}
+		
+		int nid = Integer.parseInt(newsId);
 		out.println("nid " +nid);
 		try {
 			DAO dao = new DAO();
@@ -46,21 +85,15 @@ public class findNews extends HttpServlet {
 			
 			Gson gson = new Gson();
 			String jsonData =gson.toJson(news);
-			out.print(jsonData);
+			resp.setContentType("application/json;charset=UTF-8");
+			req.setAttribute("jsonNews", jsonData);
+			req.getRequestDispatcher("/showNews.jsp").forward(req, resp);
+			System.out.println("JSON DONE!");
 //			String jsonReview =gson.toJson(reviews);
 //			out.print(jsonReview);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		}
-		
-		
-		
-		
-	}
-
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		}	
 	}
 
 }

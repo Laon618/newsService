@@ -10,5 +10,5 @@
 
 	<!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="/angularJS/angular.min.js"></script>
-    <script type="text/javascript" src="showNews.js"></script>
-    <script type="text/javascript" src="review.js"></script>
+
+

@@ -5,6 +5,7 @@
 <%
 	String name = request.getParameter("name");
 	String body = request.getParameter("body");
+	String nid = request.getParameter("nid");
 	
 	
 	webReview review = new webReview(name, body);

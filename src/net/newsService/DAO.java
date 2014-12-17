@@ -30,14 +30,28 @@ public class DAO {
 			
 	 }
 	 
-	 public void insertReview(String name, String body) throws SQLException{
-		 String insert ="INSERT INTO reviews VALUES(?,?,?,?)";
+	 public void insertReview(String name, String body, int nid) throws SQLException{
+		 String insert ="INSERT INTO reviews (name, body, news_nid) VALUES(?,?,?)";
 		 pstmt=conn.prepareStatement(insert);
-		 pstmt.setInt(1, 7);
-		 pstmt.setString(2, name);
-		 pstmt.setString(3, body);
-		 pstmt.setInt(4, 1);
+		 pstmt.setString(1, name);
+		 pstmt.setString(2, body);
+		 pstmt.setInt(3, nid);
 		 pstmt.execute();
+	 }
+	 
+	 
+	 public void insertNews(String title, String author, String body, String uDate){
+		 String insert ="INSERT INTO news VALUES(NULL,?,?,?,?)";
+		 try {
+		 pstmt=conn.prepareStatement(insert);
+		 pstmt.setString(1, title);
+		 pstmt.setString(2, author);
+		 pstmt.setString(3, body);
+		 pstmt.setString(4, uDate);
+		 pstmt.execute(); 
+		 } catch(SQLException e) {
+			 e.printStackTrace();
+		 }
 	 }
 	 
 	 public List getReviews(int nid) throws SQLException{
@@ -62,5 +76,19 @@ public class DAO {
 		webNews news = new webNews(rs.getInt(1), rs.getString("title"), rs.getString("author"), rs.getString("body"), rs.getString("uDate"));
 		return news;
 	 }
+	 
+	 public List getNewsList() throws SQLException{
+		 String select="SELECT * FROM news";
+		 pstmt= conn.prepareStatement(select);
+		 ResultSet rs=pstmt.executeQuery();
+		 List<webNews> newsList = new ArrayList<webNews>();
+		while(rs.next()){
+			webNews news = new webNews(rs.getInt(1), rs.getString("title"), rs.getString("author"), rs.getString("body"), rs.getString("uDate"));
+			newsList.add(news);
+		}
+		return newsList;
+	 }
+
+
 
 }

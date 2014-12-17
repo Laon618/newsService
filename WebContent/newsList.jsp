@@ -4,6 +4,7 @@
 <html ng-app="newsService">
 <head>
 <%@ include file="libraries.jspf"%>
+    <script type="text/javascript" src="newsList.js"></script>
 </head>
 
 <body ng-controller= "newsController as newsCon">
@@ -14,17 +15,17 @@
 	<h1 class="col-md-8 text-center">뉴스 리스트</h1>
     <div ng-controller="ListController as list">
         <div class="list-group col-md-8" >
-            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'-date'" ng-show="list.isSelected(3)"> 
+            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'-uDate'" ng-show="list.isSelected(3)" ng-click="newsCon.getArticle(article.nid)"> 
                 {{article.title}}
-                <p class="pull-right">{{article.date}}</p>
+                <p class="pull-right">{{article.uDate}}</p>
             </a>
-            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'date'" ng-show="list.isSelected(1)"> 
+            <a href="#" class="list-group-item" ng-repeat="article in newsCon.articles | orderBy:'uDate'" ng-show="list.isSelected(1)"  ng-click="newsCon.getArticle(article.nid)"> 
                 {{article.title}}
-                <p class="pull-right">{{article.date}}</p>
+                <p class="pull-right">{{article.uDate}}</p>
             </a>
         </div>
         <div class="col-md-8">
-            <button type="button" class="btn btn-default pull-right" aria-label="Left Align">
+            <button type="button" class="btn btn-default pull-right" aria-label="Left Align" ng-click="list.addNews()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 Add News
             </button>

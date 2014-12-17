@@ -43,10 +43,5 @@ public class webReview {
 		return "webReview [name=" + name + ", body=" + body + "]";
 	}
 	
-	public void addToDb() throws ClassNotFoundException, SQLException{
-		DAO dao = new DAO();
-		dao.insertReview(name,body);
-		System.out.println("ok");
-	}
 	
 }
